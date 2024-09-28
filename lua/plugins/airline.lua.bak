@@ -1,0 +1,50 @@
+return {
+  -- Other plugin configurations
+  {
+    'vim-airline/vim-airline',
+    config = function()
+      vim.g.airline_powerline_fonts = 1 -- Enable powerline fonts for a better look
+      vim.opt.laststatus = 2
+    end,
+    dependencies = { 'vim-airline/vim-airline-themes' },
+  },
+
+  {
+    'vim-airline/vim-airline-themes',
+    config = function()
+      -- Create a global function to set the Airline theme based on the Neovim colorscheme
+      _G.set_airline_theme = function()
+        -- List of Neovim theme to Airline theme mappings (add more as needed)
+        local theme_mappings = {
+          catppuccin = 'catppuccin',
+          ['catppuccin-mocha'] = 'catppuccin', -- Match specific Catppuccin variants
+          gruvbox = 'gruvbox',
+          retrobox = 'base16_gruvbox_dark_hard'
+        }
+
+        -- Get the current Neovim colorscheme
+        local current_theme = vim.g.colors_name
+
+        -- Set the Airline theme based on the mapping or fallback
+        if theme_mappings[current_theme] then
+          vim.g.airline_theme = theme_mappings[current_theme]
+          print("Airline theme set to: ", vim.g.airline_theme) -- Debug output
+        else
+          vim.g.airline_theme = 'minimalist' -- Fallback Airline theme if no match found
+          print("Airline theme defaulted to: minimalist") -- Debug output
+        end
+      end
+
+      -- Call the function initially to set the Airline theme
+      _G.set_airline_theme()
+
+      -- Autocommand to update Airline theme when the Neovim theme changes
+      vim.cmd([[
+        augroup SyncAirlineTheme
+          autocmd!
+          autocmd ColorScheme * lua _G.set_airline_theme()
+        augroup END
+      ]])
+    end,
+  },
+}
