@@ -12,8 +12,9 @@ return {
         }
       })
       --vim.cmd.colorscheme("catppuccin-mocha")  -- Set Catppuccin as your colorscheme
-      vim.cmd.colorscheme("gruvbox")  -- Set Gruvbox as your colorscheme
+      --vim.cmd.colorscheme("gruvbox")  -- Set Gruvbox as your colorscheme
       --vim.cmd.colorscheme("evangelion")  -- Set Evangelion as your colorscheme
+      vim.cmd.colorscheme("pywal16")  -- Set pywal as your colorscheme
     end,
   },
 
@@ -23,6 +24,7 @@ return {
     config = true, 
     opts = ...,
   },
+
   {
   "xero/evangelion.nvim",
   lazy = false,
@@ -34,7 +36,12 @@ return {
     },
   },
   },
+
   {
     "shrikecode/kyotonight.vim"
+  },
+  {
+    "uZer/pywal16.nvim",
+    name = 'pywal'
   }
 }

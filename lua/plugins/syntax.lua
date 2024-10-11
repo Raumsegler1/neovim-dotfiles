@@ -29,4 +29,14 @@ return {
   {
    'cohama/lexima.vim',
   },
+  {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require('colorizer').setup({})
+    end,
+  },
+  {
+    'mg979/vim-visual-multi',
+    branch = "master",
+  },
 }
